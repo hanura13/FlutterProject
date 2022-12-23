@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
@@ -31,17 +31,34 @@ class HomePage extends StatelessWidget {
         title: const Text('Demo Flutter'),
       ),
       body: const Center(
-        child: Text(
-          'Hello world',
-          textDirection: TextDirection.ltr,
-          style: TextStyle(
-            fontSize: 45.0,
-            decoration: TextDecoration.none,
-            fontFamily: 'MontserratAlternates',
-            fontWeight: FontWeight.w300,
-          ),
-        ),
+        child: HelloButton(),
       ),
+    );
+  }
+}
+
+class HelloButton extends StatelessWidget {
+  const HelloButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        action(context);
+      },
+      child: const Text('Click Me'),
+    );
+  }
+
+  void action(BuildContext context) {
+    var alertDialog = const AlertDialog(
+      title: Text('Event Handling'),
+      content: Text('Hello World'),
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => alertDialog,
     );
   }
 }
