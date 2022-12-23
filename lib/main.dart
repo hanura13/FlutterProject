@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,8 +36,9 @@ class HomePage extends StatelessWidget {
           textDirection: TextDirection.ltr,
           style: TextStyle(
             fontSize: 45.0,
-            fontStyle: FontStyle.italic,
-            color: Colors.red,
+            decoration: TextDecoration.none,
+            fontFamily: 'MontserratAlternates',
+            fontWeight: FontWeight.w300,
           ),
         ),
       ),
