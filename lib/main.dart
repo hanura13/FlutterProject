@@ -27,10 +27,10 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Demo Rows'),
+        title: const Text('Demo Columns'),
       ),
       body: Center(
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
@@ -38,21 +38,21 @@ class Home extends StatelessWidget {
               child: const Text('Button 1'),
             ),
             Container(
-              width: 10.0,
+              height: 10.0,
             ),
             ElevatedButton(
               onPressed: () {},
               child: const Text('Button 2'),
             ),
             Container(
-              width: 10.0,
+              height: 10.0,
             ),
             ElevatedButton(
               onPressed: () {},
               child: const Text('Button 3'),
             ),
             Container(
-              width: 10.0,
+              height: 10.0,
             ),
             ElevatedButton(
               onPressed: () {},
