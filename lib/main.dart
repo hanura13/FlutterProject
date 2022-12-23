@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,64 +20,44 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  int counter = 0;
-
-  void incrementCounter() {
-    setState(() {
-      counter++;
-    });
-  }
-
-  void decrementCounter() {
-    setState(() {
-      if (counter > 0) {
-        counter--;
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Demo Statefull'),
+        title: const Text('Demo Rows'),
       ),
       body: Center(
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Nilai Counter: $counter',
-              style: TextStyle(fontSize: 30.0),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Button 1'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    decrementCounter();
-                  },
-                  child: const Text('<<'),
-                ),
-                Container(
-                  width: 20.0,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    incrementCounter();
-                  },
-                  child: const Text('>>'),
-                ),
-              ],
-            )
+            Container(
+              width: 10.0,
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Button 2'),
+            ),
+            Container(
+              width: 10.0,
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Button 3'),
+            ),
+            Container(
+              width: 10.0,
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Button 4'),
+            ),
           ],
         ),
       ),
