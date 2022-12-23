@@ -30,15 +30,18 @@ class Home extends StatelessWidget {
         title: const Text('Demo Row Columns'),
       ),
       body: Center(
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Column(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: () {},
                   child: const Text('Button 1'),
+                ),
+                Container(
+                  width: 10,
                 ),
                 ElevatedButton(
                   onPressed: () {},
@@ -46,15 +49,15 @@ class Home extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              width: 10,
-            ),
-            Column(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: () {},
                   child: const Text('Button 3'),
+                ),
+                Container(
+                  width: 10,
                 ),
                 ElevatedButton(
                   onPressed: () {},
@@ -62,15 +65,15 @@ class Home extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              width: 10,
-            ),
-            Column(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: () {},
                   child: const Text('Button 5'),
+                ),
+                Container(
+                  width: 10,
                 ),
                 ElevatedButton(
                   onPressed: () {},
