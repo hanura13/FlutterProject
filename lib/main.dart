@@ -16,49 +16,72 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const Home(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int counter = 0;
+
+  void incrementCounter() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  void decrementCounter() {
+    setState(() {
+      if (counter > 0) {
+        counter--;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Demo Flutter'),
+        title: const Text('Demo Statefull'),
       ),
-      body: const Center(
-        child: HelloButton(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Nilai Counter: $counter',
+              style: TextStyle(fontSize: 30.0),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    decrementCounter();
+                  },
+                  child: const Text('<<'),
+                ),
+                Container(
+                  width: 20.0,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    incrementCounter();
+                  },
+                  child: const Text('>>'),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
-    );
-  }
-}
-
-class HelloButton extends StatelessWidget {
-  const HelloButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        action(context);
-      },
-      child: const Text('Click Me'),
-    );
-  }
-
-  void action(BuildContext context) {
-    var alertDialog = const AlertDialog(
-      title: Text('Event Handling'),
-      content: Text('Hello World'),
-    );
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => alertDialog,
     );
   }
 }
