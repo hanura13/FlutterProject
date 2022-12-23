@@ -27,36 +27,56 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Demo Columns'),
+        title: const Text('Demo Row Columns'),
       ),
       body: Center(
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Button 1'),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Button 1'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Button 2'),
+                ),
+              ],
             ),
             Container(
-              height: 10.0,
+              width: 10,
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Button 2'),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Button 3'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Button 4'),
+                ),
+              ],
             ),
             Container(
-              height: 10.0,
+              width: 10,
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Button 3'),
-            ),
-            Container(
-              height: 10.0,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Button 4'),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Button 5'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Button 6'),
+                ),
+              ],
             ),
           ],
         ),
