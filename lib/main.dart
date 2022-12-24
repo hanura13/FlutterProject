@@ -28,87 +28,40 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<String> settings = [
-    'Airplane Mode',
-    'WLAN',
-    'Mobile Data',
-    'Bluetooth'
-  ];
-  List<bool> settingValues = [false, false, false, false];
+  final int count = 20;
+  List<bool> items = [];
 
-  void onChangedSwitch1(bool value) {
+  @override
+  void initState() {
     setState(() {
-      settingValues[0] = value;
+      for (var i = 0; i < count; i++) {
+        items.add(false);
+      }
     });
-    print(settingValues);
-  }
-
-  void onChangedSwitch2(bool value) {
-    setState(() {
-      settingValues[1] = value;
-    });
-    print(settingValues);
-  }
-
-  void onChangedSwitch3(bool value) {
-    setState(() {
-      settingValues[2] = value;
-    });
-    print(settingValues);
-  }
-
-  void onChangedSwitch4(bool value) {
-    setState(() {
-      settingValues[3] = value;
-    });
-    print(settingValues);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SwitchList'),
+        title: const Text('Card'),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(10.0),
-        child: ListView(
-          children: <Widget>[
-            SwitchListTile(
-              value: settingValues[0],
-              onChanged: (bool value) {
-                onChangedSwitch1(value);
-              },
-              title: Text(settings[0]),
-              secondary: const Icon(Icons.airplanemode_active),
+      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
+        return Card(
+          margin: const EdgeInsets.only(left: 15.0, top: 20.0, right: 15.0),
+          child: GestureDetector(
+            onTap: (() {
+              print('Anda memilih item ${index + 1}');
+            }),
+            child: ListTile(
+              title: Text('Item ${index + 1}'),
+              leading: const Icon(Icons.person),
+              trailing: const Icon(Icons.star),
             ),
-            SwitchListTile(
-              value: settingValues[1],
-              onChanged: (bool value) {
-                onChangedSwitch2(value);
-              },
-              title: Text(settings[1]),
-              secondary: const Icon(Icons.wifi),
-            ),
-            SwitchListTile(
-              value: settingValues[2],
-              onChanged: (bool value) {
-                onChangedSwitch3(value);
-              },
-              title: Text(settings[2]),
-              secondary: const Icon(Icons.data_usage),
-            ),
-            SwitchListTile(
-              value: settingValues[3],
-              onChanged: (bool value) {
-                onChangedSwitch4(value);
-              },
-              title: Text(settings[3]),
-              secondary: const Icon(Icons.bluetooth),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }),
     );
   }
 }
