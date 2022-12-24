@@ -28,79 +28,83 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<String> bahasa = ['Java', 'Kotlin', 'Dart'];
+  final List<String> settings = [
+    'Airplane Mode',
+    'WLAN',
+    'Mobile Data',
+    'Bluetooth'
+  ];
+  List<bool> settingValues = [false, false, false, false];
 
-  bool? selected1 = false;
-  bool? selected2 = false;
-  bool? selected3 = false;
-  List<int> list = [];
-
-  void onChanged(bool? value) {
+  void onChangedSwitch1(bool value) {
     setState(() {
-      selected1 = value;
+      settingValues[0] = value;
     });
-    if (value == true)
-      list.add(0);
-    else
-      list.remove(0);
-    print(list);
+    print(settingValues);
   }
 
-  void onChanged2(bool? value) {
+  void onChangedSwitch2(bool value) {
     setState(() {
-      selected2 = value;
+      settingValues[1] = value;
     });
-    if (value == true) {
-      list.add(1);
-    } else {
-      list.remove(1);
-    }
-    print(list);
+    print(settingValues);
   }
 
-  void onChanged3(bool? value) {
+  void onChangedSwitch3(bool value) {
     setState(() {
-      selected3 = value;
+      settingValues[2] = value;
     });
-    if (value == true) {
-      list.add(2);
-    } else {
-      list.remove(2);
-    }
-    print(list);
+    print(settingValues);
+  }
+
+  void onChangedSwitch4(bool value) {
+    setState(() {
+      settingValues[3] = value;
+    });
+    print(settingValues);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Checkbox'),
+        title: const Text('SwitchList'),
       ),
       body: Container(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
+        child: ListView(
           children: <Widget>[
-            const Text('Bahasa yang dipelajari'),
-            CheckboxListTile(
-              value: selected1,
-              onChanged: onChanged,
-              title: Text(bahasa[0]),
-              activeColor: Colors.red,
-              secondary: const Icon(Icons.language),
+            SwitchListTile(
+              value: settingValues[0],
+              onChanged: (bool value) {
+                onChangedSwitch1(value);
+              },
+              title: Text(settings[0]),
+              secondary: const Icon(Icons.airplanemode_active),
             ),
-            CheckboxListTile(
-              value: selected2,
-              onChanged: onChanged2,
-              title: Text(bahasa[1]),
-              activeColor: Colors.red,
-              secondary: const Icon(Icons.language),
+            SwitchListTile(
+              value: settingValues[1],
+              onChanged: (bool value) {
+                onChangedSwitch2(value);
+              },
+              title: Text(settings[1]),
+              secondary: const Icon(Icons.wifi),
             ),
-            CheckboxListTile(
-              value: selected3,
-              onChanged: onChanged3,
-              title: Text(bahasa[2]),
-              activeColor: Colors.red,
-              secondary: const Icon(Icons.language),
+            SwitchListTile(
+              value: settingValues[2],
+              onChanged: (bool value) {
+                onChangedSwitch3(value);
+              },
+              title: Text(settings[2]),
+              secondary: const Icon(Icons.data_usage),
+            ),
+            SwitchListTile(
+              value: settingValues[3],
+              onChanged: (bool value) {
+                onChangedSwitch4(value);
+              },
+              title: Text(settings[3]),
+              secondary: const Icon(Icons.bluetooth),
             ),
           ],
         ),
