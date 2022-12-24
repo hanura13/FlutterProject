@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -26,47 +28,80 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String name = '';
-  String text = '';
+  final List<String> bahasa = ['Java', 'Kotlin', 'Dart'];
 
-  void onPressed() {
+  bool? selected1 = false;
+  bool? selected2 = false;
+  bool? selected3 = false;
+  List<int> list = [];
+
+  void onChanged(bool? value) {
     setState(() {
-      if (name.trim().isEmpty) return;
-      text = 'Hai $name, Apa Kabar?';
+      selected1 = value;
     });
+    if (value == true)
+      list.add(0);
+    else
+      list.remove(0);
+    print(list);
   }
 
-  void onChanged(String value) {
+  void onChanged2(bool? value) {
     setState(() {
-      name = value;
+      selected2 = value;
     });
+    if (value == true) {
+      list.add(1);
+    } else {
+      list.remove(1);
+    }
+    print(list);
+  }
+
+  void onChanged3(bool? value) {
+    setState(() {
+      selected3 = value;
+    });
+    if (value == true) {
+      list.add(2);
+    } else {
+      list.remove(2);
+    }
+    print(list);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Demo Textfield'),
+        title: const Text('Checkbox'),
       ),
       body: Container(
-        margin: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
-            TextField(
-              onChanged: (String value) {
-                onChanged(value);
-              },
+            const Text('Bahasa yang dipelajari'),
+            CheckboxListTile(
+              value: selected1,
+              onChanged: onChanged,
+              title: Text(bahasa[0]),
+              activeColor: Colors.red,
+              secondary: const Icon(Icons.language),
             ),
-            ElevatedButton(
-              onPressed: () {
-                onPressed();
-              },
-              child: const Text('Click'),
+            CheckboxListTile(
+              value: selected2,
+              onChanged: onChanged2,
+              title: Text(bahasa[1]),
+              activeColor: Colors.red,
+              secondary: const Icon(Icons.language),
             ),
-            Container(
-              height: 15.0,
+            CheckboxListTile(
+              value: selected3,
+              onChanged: onChanged3,
+              title: Text(bahasa[2]),
+              activeColor: Colors.red,
+              secondary: const Icon(Icons.language),
             ),
-            Text(text),
           ],
         ),
       ),
