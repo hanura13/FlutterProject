@@ -11,57 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: const Text(
-                    'Oescgin Lake Campground',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Text(
-                  'Kabdersteg, Switzerland',
-                  style: TextStyle(color: Colors.grey[500]),
-                )
-              ],
-            ),
-          ),
-          const FavoriteWidget(),
-        ],
-      ),
-    );
-
-    Color color = Theme.of(context).primaryColor;
-
-    Widget buttonSection = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildButtonColumn(color, Icons.call, 'CALL'),
-        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
-        _buildButtonColumn(color, Icons.share, 'SHARE'),
-      ],
-    );
-
-    Widget textSection = const Padding(
-      padding: EdgeInsets.all(32),
-      child: Text(
-        'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-        'Alps. Situated 1,578 meters above sea level, it is one of the '
-        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-        'half-hour walk through pastures and pine forest, leads you to the '
-        'lake, which warms to 20 degrees Celsius in the summer. Activities '
-        'enjoyed here include rowing, and riding the summer toboggan run.',
-        softWrap: true,
-      ),
-    );
-
     return MaterialApp(
       title: 'Hello World',
       debugShowCheckedModeBanner: false,
@@ -69,92 +18,48 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter Layout Demo'),
-        ),
-        body: ListView(
-          children: [
-            Image.asset(
-              'images/wisata.jpg',
-              width: 600,
-              height: 240,
-              fit: BoxFit.cover,
-            ),
-            titleSection,
-            buttonSection,
-            textSection,
-          ],
-        ),
-      ),
-    );
-  }
-
-  Column _buildButtonColumn(Color color, IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: color),
-        Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
+          appBar: AppBar(
+            title: const Text('Widget State'),
           ),
-        )
-      ],
+          body: const Center(
+            child: TapboxA(),
+          )),
     );
   }
 }
 
-class FavoriteWidget extends StatefulWidget {
-  const FavoriteWidget({super.key});
+class TapboxA extends StatefulWidget {
+  const TapboxA({super.key});
 
   @override
-  State<FavoriteWidget> createState() => _FavoriteWidgetState();
+  State<TapboxA> createState() => _TapboxAState();
 }
 
-class _FavoriteWidgetState extends State<FavoriteWidget> {
-  bool _isFavorited = true;
-  int _favoriteCount = 41;
-
-  void _toggleFavorite() {
+class _TapboxAState extends State<TapboxA> {
+  bool _active = false;
+  void _handleTap() {
     setState(() {
-      if (_isFavorited) {
-        _isFavorited = false;
-        _favoriteCount -= 1;
-      } else {
-        _favoriteCount += 1;
-        _isFavorited = true;
-      }
+      _active = !_active;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(0),
-          child: IconButton(
-            onPressed: _toggleFavorite,
-            icon: _isFavorited
-                ? const Icon(Icons.star)
-                : const Icon(Icons.star_border),
+    return GestureDetector(
+      onTap: _handleTap,
+      child: Container(
+        width: 200.0,
+        height: 200.0,
+        decoration: BoxDecoration(
+          color: _active ? Colors.lightGreen[700] : Colors.grey[600],
+        ),
+        child: Center(
+          child: Text(
+            _active ? 'Active' : 'Inactive',
+            style: const TextStyle(fontSize: 32.0, color: Colors.white),
           ),
         ),
-        SizedBox(
-          width: 18,
-          child: SizedBox(
-            child: Text('$_favoriteCount'),
-          ),
-        )
-      ],
+      ),
     );
   }
 }
