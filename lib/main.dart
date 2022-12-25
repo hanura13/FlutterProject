@@ -19,43 +19,69 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
           appBar: AppBar(
-            title: const Text('Widget State'),
+            title: const Text('Parent Widget State'),
           ),
           body: const Center(
-            child: TapboxA(),
+            child: ParentWidget(),
           )),
     );
   }
 }
 
-class TapboxA extends StatefulWidget {
-  const TapboxA({super.key});
+class ParentWidget extends StatefulWidget {
+  const ParentWidget({super.key});
 
   @override
-  State<TapboxA> createState() => _TapboxAState();
+  State<ParentWidget> createState() => _ParentWidgetState();
 }
 
-class _TapboxAState extends State<TapboxA> {
+class _ParentWidgetState extends State<ParentWidget> {
   bool _active = false;
-  void _handleTap() {
+
+  void _handleTapboxChanged(bool newValue) {
     setState(() {
-      _active = !_active;
+      _active = newValue;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    return SizedBox(
+      child: TapboxB(
+        onChanged: _handleTapboxChanged,
+        active: _active,
+      ),
+    );
+  }
+}
+
+class TapboxB extends StatelessWidget {
+  const TapboxB({
+    super.key,
+    this.active = false,
+    required this.onChanged,
+  });
+
+  final bool active;
+  final ValueChanged<bool> onChanged;
+
+  void _handelTap() {
+    onChanged(!active);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _handleTap,
+      onTap: _handelTap,
       child: Container(
         width: 200.0,
         height: 200.0,
         decoration: BoxDecoration(
-          color: _active ? Colors.lightGreen[700] : Colors.grey[600],
+          color: active ? Colors.lightGreen[700] : Colors.grey[600],
         ),
         child: Center(
           child: Text(
-            _active ? 'Active' : 'Inactive',
+            active ? 'Active' : 'Inactive',
             style: const TextStyle(fontSize: 32.0, color: Colors.white),
           ),
         ),
