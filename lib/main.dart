@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:basic_project/TapboxC.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -47,7 +48,7 @@ class _ParentWidgetState extends State<ParentWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: TapboxB(
+      child: TapboxC(
         onChanged: _handleTapboxChanged,
         active: _active,
       ),
