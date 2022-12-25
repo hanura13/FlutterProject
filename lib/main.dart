@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,92 +11,106 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget titleSection = Container(
+      padding: const EdgeInsets.all(32),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: const Text(
+                    'Oescgin Lake Campground',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Text(
+                  'Kabdersteg, Switzerland',
+                  style: TextStyle(color: Colors.grey[500]),
+                )
+              ],
+            ),
+          ),
+          Icon(
+            Icons.star,
+            color: Colors.red[500],
+          ),
+          const Text('41'),
+        ],
+      ),
+    );
+
+    Color color = Theme.of(context).primaryColor;
+
+    Widget buttonSection = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _buildButtonColumn(color, Icons.call, 'CALL'),
+        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
+        _buildButtonColumn(color, Icons.share, 'SHARE'),
+      ],
+    );
+
+    Widget textSection = const Padding(
+      padding: EdgeInsets.all(32),
+      child: Text(
+        'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
+        'Alps. Situated 1,578 meters above sea level, it is one of the '
+        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+        'half-hour walk through pastures and pine forest, leads you to the '
+        'lake, which warms to 20 degrees Celsius in the summer. Activities '
+        'enjoyed here include rowing, and riding the summer toboggan run.',
+        softWrap: true,
+      ),
+    );
+
     return MaterialApp(
       title: 'Hello World',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Flutter Layout Demo'),
+        ),
+        body: ListView(
+          children: [
+            Image.asset(
+              'images/wisata.jpg',
+              width: 600,
+              height: 240,
+              fit: BoxFit.cover,
+            ),
+            titleSection,
+            buttonSection,
+            textSection,
+          ],
+        ),
+      ),
     );
   }
-}
 
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  final String title = 'Mata Langit Brobudur';
-  final String location = 'Magelang Jawa Tengah';
-  final String description =
-      '''Tempat wisata yang satu ini letaknya tidak jauh dari Candi Borobudur. Tepatnya di Ngargogondo, Kecamatan Borobudur, Magelang, Jawa Tengah. Mata Langit Borobudur menawarkan sky lounge dengan paket piknik outdoor nan Instagramable. Jadi bisa foto-foto fine dining dengan latar pemandangan alam layaknya selebgram.
-  ''';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Objek Wisata'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Image.asset(
-            'images/wisata.jpg',
-            height: 250.0,
-            width: 412.0,
-            fit: BoxFit.fill,
-          ),
-          Container(
-            height: 15.0,
-          ),
-          Row(
-            children: <Widget>[
-              Container(
-                width: 15.0,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    location,
-                    style: const TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                width: 90.0,
-              ),
-              const Icon(
-                Icons.star,
-                size: 32.0,
-                color: Colors.red,
-              ),
-              const Text(
-                '5',
-                style: TextStyle(fontSize: 15.0),
-              ),
-            ],
-          ),
-          Container(
-            padding: const EdgeInsets.all(15.0),
-            child: Text(
-              description,
-              style: const TextStyle(fontSize: 18.0),
-              softWrap: true,
+  Column _buildButtonColumn(Color color, IconData icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color),
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
             ),
           ),
-        ],
-      ),
+        )
+      ],
     );
   }
 }
